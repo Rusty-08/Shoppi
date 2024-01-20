@@ -1,4 +1,4 @@
-import colors from 'tailwindcss/colors'
+// import colors from 'tailwindcss/colors'
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -16,12 +16,12 @@ export default {
       },
       colors: {
         primary: {
-          DEFAULT: colors.slate[200],
-          hover: colors.slate[300],
-          text: colors.slate[500],
-          active: colors.sky[700],
-          dark: colors.slate[800],
-          ['hover-dark']: colors.slate[900],
+          DEFAULT: '#E6E6E6',
+          blue: '#1f4690',
+          text: '#768A96',
+          medium: '#AAC7D8',
+          light: '#DFEBF6',
+          dark: '#29353C',
         }
       }
     },
