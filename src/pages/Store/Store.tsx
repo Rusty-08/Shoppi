@@ -1,44 +1,38 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useState } from 'react'
-import fetchDataFromAPI from '../../services/api'
-import { productProps } from './propTypes'
 import { Products } from './Products'
+import { Outlet, useParams } from 'react-router-dom'
+import { useDataFetching } from './data/dataFetching'
+import { Loading } from '../../components/Loading'
+import { ErrorMessage } from '../../components/ErrorMessage'
 
 export const Store = () => {
-  const [data, setData] = useState<productProps[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<Error | null>(null)
+  const { data, setData, loading, error } = useDataFetching()
+  const { productId } = useParams()
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await fetchDataFromAPI()
-        setData(result)
-      } catch (error: unknown) {
-        if (error instanceof Error) {
-          setError(error)
-        } else {
-          console.error('Unknown error:', error)
-        }
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchData()
-  }, [])
+  const handleProductClick = (id: number) => {
+    setData(prevData =>
+      prevData.map(product =>
+        product.id === Number(id)
+          ? { ...product, expanded: !product.expanded }
+          : product,
+      ),
+    )
+  }
 
   if (loading) {
-    return <div>Loading...</div>
+    return <Loading loading={loading} />
   }
 
   if (error) {
-    return <p>Error: {error.message}</p>
+    return <ErrorMessage error={error} />
   }
 
   return (
-    <div className="py-10">
-      <Products data={data} />
+    <div>
+      {!productId && (
+        <Products data={data} handleProductClick={handleProductClick} />
+      )}
+      <Outlet />
     </div>
   )
 }

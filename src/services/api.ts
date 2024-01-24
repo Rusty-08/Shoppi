@@ -22,6 +22,7 @@ export async function fetchDataFromAPI(
     }
 
     const data = await response.json()
+    console.log(data)
     return data
   } catch (error: any) {
     if (error.name === 'AbortError') {

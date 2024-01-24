@@ -17,6 +17,7 @@ export default {
       colors: {
         primary: {
           DEFAULT: '#E6E6E6',
+          'low-opacity-blue': 'rgba(31, 70, 144, 0.1)',
           blue: '#1f4690',
           text: '#768A96',
           medium: '#AAC7D8',

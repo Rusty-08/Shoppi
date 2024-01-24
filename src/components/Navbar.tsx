@@ -13,7 +13,7 @@ const pathName = (path: string) => {
 
 const Navbar = () => {
   return (
-    <nav className="w-screen fixed top-0 bg-white h-header left-0">
+    <nav className="w-screen z-50 fixed top-0 bg-slate-50 h-header left-0">
       <div className="h-full mx-[10%] px-3 flex border-b border-b-primary items-center justify-between">
         <Link to="/" className="flex gap-2">
           <ShoppingBasket className="w-8 h-8 text-primary-blue" />

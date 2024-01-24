@@ -18,7 +18,6 @@ module.exports = {
     "quotes": ["error", "single"],
     "no-unused-vars": "warn",
     "arrow-parens": ["error", "as-needed"],
-    "consistent-return": "error",
     "object-curly-spacing": ["error", "always"],
     "one-var": ["error", "never"]
   }
