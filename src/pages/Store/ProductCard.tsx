@@ -1,4 +1,4 @@
-import { productProps } from './data/propTypes'
+import { productProps } from './propTypes'
 import { StarRating } from '../../components/StarRating'
 import { ShoppingCart } from 'lucide-react'
 import { Button } from '../../components/Button'

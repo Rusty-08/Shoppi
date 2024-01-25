@@ -1,6 +1,7 @@
-import { ShoppingBasket, ShoppingCart } from 'lucide-react'
+import { Dot, ShoppingBasket, ShoppingCart } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { LinkPath } from './LinkPath'
+import { Button } from './Button'
 
 const paths = ['Home', 'Store']
 
@@ -11,10 +12,14 @@ const pathName = (path: string) => {
   return '/'
 }
 
-const Navbar = () => {
+type NavbarProps = {
+  setShowSidebar: () => void
+}
+
+const Navbar = ({ setShowSidebar }: NavbarProps) => {
   return (
     <nav className="w-screen z-50 fixed top-0 bg-slate-50 h-header left-0">
-      <div className="h-full mx-[10%] px-3 flex border-b border-b-primary items-center justify-between">
+      <div className="h-full ml-[10%] mr-[11%] px-3 flex border-b border-b-primary items-center justify-between">
         <Link to="/" className="flex gap-2">
           <ShoppingBasket className="w-8 h-8 text-primary-blue" />
           <h1 className="text-2xl font-medium text-primary-dark">Shoppi</h1>
@@ -27,9 +32,15 @@ const Navbar = () => {
               </LinkPath>
             ))}
           </ul>
-          <button className="px-2 ps-7 border-l border-l-primary text-primary-text hover:text-primary-dark">
+          <Button
+            className="hover:text-primary-dark relative"
+            variant="transparent"
+            size="icon"
+            onClick={setShowSidebar}
+          >
             <ShoppingCart strokeWidth={1} />
-          </button>
+            <Dot className="absolute text-primary-blue -top-1 -right-2" />
+          </Button>
         </div>
       </div>
     </nav>

@@ -1,9 +1,8 @@
-// dataFetching.ts
 import { useState, useEffect, useMemo } from 'react'
-import fetchDataFromAPI from '../../../services/api'
-import { productProps } from './propTypes'
+import fetchProducts from '../services/fetchProducts'
+import { productProps } from '../pages/Store/propTypes'
 
-export const useDataFetching = () => {
+export const useFetchProducts = () => {
   const [data, setData] = useState<productProps[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<Error | null>(null)
@@ -11,7 +10,7 @@ export const useDataFetching = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await fetchDataFromAPI()
+        const result = await fetchProducts()
         const newResult = await result.map((item: object) => ({
           ...item,
           expanded: false,

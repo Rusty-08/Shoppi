@@ -9,7 +9,8 @@ export default {
   theme: {
     extend: {
       height: {
-        header: '5rem'
+        header: '5rem',
+        ['container-height']: 'calc(100vh - 5rem)'
       },
       width: {
 

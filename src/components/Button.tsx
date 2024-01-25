@@ -10,6 +10,7 @@ const buttonVariance = cva(
     'justify-center',
     'flex',
     'gap-2',
+    'text-primary-text',
   ],
   {
     variants: {
@@ -21,7 +22,8 @@ const buttonVariance = cva(
           'text-sm',
           'text-primary',
         ],
-        ghost: ['hover:bg-neutral-200'],
+        ghost: ['hover:bg-primary-low-opacity-blue'],
+        transparent: ['hover:bg-transparent'],
       },
       size: {
         default: ['rounded-full', 'px-5', 'py-2'],

@@ -1,12 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Products } from './Products'
-import { useDataFetching } from './data/dataFetching'
+import { useFetchProducts } from '../../hooks/useFetchProducts'
 import { Loading } from '../../components/Loading'
 import { ErrorMessage } from '../../components/ErrorMessage'
 import { ExpandProduct } from './ExpandProduct'
+import { Container } from '../../components/Container'
+import { useEffect } from 'react'
+// import useClickOutside from '../../hooks/useClickOutside'
 
 export const Store = () => {
-  const { data: memoizedData, setData, loading, error } = useDataFetching()
+  const { data: memoizedData, setData, loading, error } = useFetchProducts()
+  // const { ref, isVisible, setIsVisible } = useClickOutside(false)
 
   const handleProductClick = (id: number) => {
     setData(prevData =>
@@ -16,6 +20,7 @@ export const Store = () => {
           : { ...product, expanded: false },
       ),
     )
+    // setIsVisible(true)
   }
 
   const handleBackClick = () => {
@@ -29,6 +34,20 @@ export const Store = () => {
 
   const product = memoizedData.find(product => product.expanded)
 
+  useEffect(() => {
+    if (product) {
+      document.body.style.overflowY = 'hidden'
+    } else {
+      document.body.style.overflowY = 'auto'
+    }
+  }, [product])
+
+  // useEffect(() => {
+  //   if (!isVisible) {
+  //     handleBackClick()
+  //   }
+  // }, [isVisible])
+
   if (loading) {
     return <Loading loading={loading} />
   }
@@ -37,11 +56,16 @@ export const Store = () => {
     return <ErrorMessage error={error} />
   }
 
-  if (product) {
-    return <ExpandProduct product={product} handleBackClick={handleBackClick} />
-  }
-
   return (
-    <Products data={memoizedData} handleProductClick={handleProductClick} />
+    <Container>
+      <Products
+        className={product ? 'mr-3' : 'mr-0'}
+        data={memoizedData}
+        handleProductClick={handleProductClick}
+      />
+      {product && (
+        <ExpandProduct product={product} handleBackClick={handleBackClick} />
+      )}
+    </Container>
   )
 }

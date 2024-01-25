@@ -1,6 +1,6 @@
 import { ClassNameValue, twMerge } from 'tailwind-merge'
 import { ProductCard } from './ProductCard'
-import { productProps } from './data/propTypes'
+import { productProps } from './propTypes'
 
 type ProductCardProps = {
   data: productProps[]

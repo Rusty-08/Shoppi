@@ -1,12 +1,9 @@
-/* eslint-disable consistent-return */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type FetchDataOptions = {
   signal?: AbortSignal | null
 }
 
-export async function fetchDataFromAPI(
-  options: FetchDataOptions = {},
-): Promise<any> {
+async function fetchProducts(options: FetchDataOptions = {}): Promise<any> {
   const apiUrl = 'https://fakestoreapi.com/products'
 
   const controller = new AbortController()
@@ -33,4 +30,4 @@ export async function fetchDataFromAPI(
   }
 }
 
-export default fetchDataFromAPI
+export default fetchProducts
