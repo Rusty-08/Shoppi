@@ -27,8 +27,8 @@ const buttonVariance = cva(
         default: ['rounded-full', 'px-5', 'py-2'],
         icon: [
           'rounded-full',
-          'w-8',
-          'h-8',
+          'w-10',
+          'h-10',
           'p-2',
           'flex',
           'items-center',

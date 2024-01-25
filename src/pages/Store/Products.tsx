@@ -1,21 +1,27 @@
-import { Link } from 'react-router-dom'
+import { ClassNameValue, twMerge } from 'tailwind-merge'
 import { ProductCard } from './ProductCard'
 import { productProps } from './data/propTypes'
 
 type ProductCardProps = {
   data: productProps[]
+  // eslint-disable-next-line no-unused-vars
   handleProductClick: (_: number) => void
+  className?: ClassNameValue
 }
 
-export const Products = ({ data, handleProductClick }: ProductCardProps) => {
+export const Products = ({
+  data,
+  handleProductClick,
+  className,
+}: ProductCardProps) => {
+  const handleClick = (id: number) => {
+    handleProductClick(id)
+  }
+
   return (
-    <div className="grid relative gap-4 grid-cols-4">
+    <div className={twMerge('grid relative gap-4 grid-cols-4', className)}>
       {data.map(({ id, title, price, image, expanded }) => (
-        <Link
-          key={id}
-          to={`/store/product/${id}`}
-          onClick={() => handleProductClick(id)}
-        >
+        <button key={id} onClick={() => handleClick(id)}>
           <ProductCard
             id={id}
             title={title}
@@ -23,7 +29,7 @@ export const Products = ({ data, handleProductClick }: ProductCardProps) => {
             image={image}
             expanded={expanded}
           />
-        </Link>
+        </button>
       ))}
     </div>
   )

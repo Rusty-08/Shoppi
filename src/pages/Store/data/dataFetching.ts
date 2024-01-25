@@ -1,5 +1,5 @@
 // dataFetching.ts
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import fetchDataFromAPI from '../../../services/api'
 import { productProps } from './propTypes'
 
@@ -31,5 +31,7 @@ export const useDataFetching = () => {
     fetchData()
   }, [])
 
-  return { data, setData, loading, error }
+  const memoizedData = useMemo(() => data, [data])
+
+  return { data: memoizedData, setData, loading, error }
 }
