@@ -2,6 +2,7 @@ import { Dot, ShoppingBasket, ShoppingCart } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { LinkPath } from './LinkPath'
 import { Button } from './Button'
+import { ForwardedRef } from 'react'
 
 const paths = ['Home', 'Store']
 
@@ -14,9 +15,10 @@ const pathName = (path: string) => {
 
 type NavbarProps = {
   setShowSidebar: () => void
+  exceptionRef: ForwardedRef<HTMLButtonElement>
 }
 
-const Navbar = ({ setShowSidebar }: NavbarProps) => {
+const Navbar = ({ setShowSidebar, exceptionRef }: NavbarProps) => {
   return (
     <nav className="w-screen z-50 fixed top-0 bg-slate-50 h-header left-0">
       <div className="h-full ml-[10%] mr-[11%] px-3 flex border-b border-b-primary items-center justify-between">
@@ -33,6 +35,7 @@ const Navbar = ({ setShowSidebar }: NavbarProps) => {
             ))}
           </ul>
           <Button
+            forwardedRef={exceptionRef}
             className="hover:text-primary-dark relative"
             variant="transparent"
             size="icon"

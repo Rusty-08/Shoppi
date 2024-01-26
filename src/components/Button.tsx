@@ -1,5 +1,5 @@
 import { VariantProps, cva } from 'class-variance-authority'
-import { ComponentProps } from 'react'
+import { ComponentProps, ForwardedRef } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 const buttonVariance = cva(
@@ -48,9 +48,20 @@ const buttonVariance = cva(
 type buttonProps = VariantProps<typeof buttonVariance> &
   ComponentProps<'button'>
 
-export const Button = ({ variant, size, className, ...props }: buttonProps) => {
+type mixProps = buttonProps & {
+  forwardedRef?: ForwardedRef<HTMLButtonElement>
+}
+
+export const Button = ({
+  variant,
+  size,
+  className,
+  forwardedRef,
+  ...props
+}: mixProps) => {
   return (
     <button
+      ref={forwardedRef}
       className={twMerge(buttonVariance({ variant, size }), className)}
       {...props}
     />

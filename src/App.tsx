@@ -3,20 +3,42 @@ import Navbar from './components/Navbar'
 import { Home } from './pages/Home'
 import { Store } from './pages/Store/Store'
 import { CartSidebar } from './components/CartSidebar'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import useClickOutside from './hooks/useClickOutside'
 
 function App() {
   const [showSidebar, setShowSidebar] = useState(false)
+  const hamburgerButtonRef = useRef<HTMLButtonElement>(null)
+  const { ref, isVisible, setIsVisible } = useClickOutside(
+    showSidebar,
+    hamburgerButtonRef,
+  )
+
+  const handleSidebarToggle = () => {
+    setShowSidebar(prev => {
+      setIsVisible(!prev)
+      return !prev
+    })
+  }
+
+  useEffect(() => {
+    if (!isVisible) {
+      setShowSidebar(false)
+    }
+  }, [isVisible])
 
   return (
     <section className="bg-slate-50 min-h-screen">
-      <Navbar setShowSidebar={() => setShowSidebar(!showSidebar)} />
+      <Navbar
+        setShowSidebar={handleSidebarToggle}
+        exceptionRef={hamburgerButtonRef}
+      />
       <main className="mx-[10%] relative pt-[7rem] pb-8">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/store" element={<Store />} />
         </Routes>
-        <CartSidebar showSidebar={showSidebar} />
+        <CartSidebar forwaredRef={ref} showSidebar={showSidebar} />
       </main>
     </section>
   )

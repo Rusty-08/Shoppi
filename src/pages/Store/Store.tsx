@@ -5,12 +5,13 @@ import { Loading } from '../../components/Loading'
 import { ErrorMessage } from '../../components/ErrorMessage'
 import { ExpandProduct } from './ExpandProduct'
 import { Container } from '../../components/Container'
-import { useEffect } from 'react'
-// import useClickOutside from '../../hooks/useClickOutside'
+import { useEffect, useRef } from 'react'
+import useClickOutside from '../../hooks/useClickOutside'
 
 export const Store = () => {
   const { data: memoizedData, setData, loading, error } = useFetchProducts()
-  // const { ref, isVisible, setIsVisible } = useClickOutside(false)
+  const productRef = useRef<HTMLDivElement>(null)
+  const { ref, isVisible, setIsVisible } = useClickOutside(false, productRef)
 
   const handleProductClick = (id: number) => {
     setData(prevData =>
@@ -20,7 +21,7 @@ export const Store = () => {
           : { ...product, expanded: false },
       ),
     )
-    // setIsVisible(true)
+    setIsVisible(true)
   }
 
   const handleBackClick = () => {
@@ -42,11 +43,11 @@ export const Store = () => {
     }
   }, [product])
 
-  // useEffect(() => {
-  //   if (!isVisible) {
-  //     handleBackClick()
-  //   }
-  // }, [isVisible])
+  useEffect(() => {
+    if (!isVisible) {
+      handleBackClick()
+    }
+  }, [isVisible])
 
   if (loading) {
     return <Loading loading={loading} />
@@ -59,12 +60,17 @@ export const Store = () => {
   return (
     <Container>
       <Products
+        exceptionRef={productRef}
         className={product ? 'mr-3' : 'mr-0'}
         data={memoizedData}
         handleProductClick={handleProductClick}
       />
       {product && (
-        <ExpandProduct product={product} handleBackClick={handleBackClick} />
+        <ExpandProduct
+          forwardeRef={ref}
+          product={product}
+          handleBackClick={handleBackClick}
+        />
       )}
     </Container>
   )

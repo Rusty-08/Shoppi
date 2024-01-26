@@ -3,21 +3,27 @@ import { ShoppingCart } from 'lucide-react'
 import { ProductNumber } from '../../components/ProductNumber'
 import { CloseButton } from '../../components/CloseButton'
 import { productProps } from './propTypes'
+import { ForwardedRef } from 'react'
 
 type ExpandProductProps = {
   product: productProps
   handleBackClick: () => void
+  forwardeRef: ForwardedRef<HTMLDivElement>
 }
 
 export const ExpandProduct = ({
   product,
   handleBackClick,
+  forwardeRef,
 }: ExpandProductProps) => {
   const { title, description, image, price, category } = product
 
   return (
     <div className="flex top-[5rem] bottom-0 w-full bg-primary-low-opacity-blue backdrop-blur-sm fixed items-center justify-center">
-      <div className="flex h-[28rem] border relative p-6 pt-12 w-full ml-[10%] mr-[11%] shadow-md border-t-4 border-primary-blue border-opacity-50 bg-white rounded-lg">
+      <div
+        ref={forwardeRef}
+        className="flex h-[28rem] border relative p-6 pt-12 w-full ml-[10%] mr-[11%] shadow-md border-t-4 border-primary-blue border-opacity-50 bg-white rounded-lg"
+      >
         <div className="h-full border-r w-1/2 flex items-center justify-center bg-cover">
           <img
             className={`${
