@@ -1,7 +1,7 @@
 type errorMessageProps = {
-  error: Error
+  error: string | undefined | null
 }
 
 export const ErrorMessage = ({ error }: errorMessageProps) => {
-  return <p>{error.message}</p>
+  return <p>{error}</p>
 }

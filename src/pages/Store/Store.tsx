@@ -1,39 +1,32 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Products } from './Products'
-import { useFetchProducts } from '../../hooks/useFetchProducts'
 import { Loading } from '../../components/Loading'
 import { ErrorMessage } from '../../components/ErrorMessage'
 import { ExpandProduct } from './ExpandProduct'
 import { Container } from '../../components/Container'
 import { useEffect, useRef } from 'react'
 import useClickOutside from '../../hooks/useClickOutside'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from '../../app/store'
+import {
+  expandProduct,
+  fetchProductsAsync,
+  handleBackClick,
+} from '../../slices/productSlice'
 
-export const Store = () => {
-  const { data: memoizedData, setData, loading, error } = useFetchProducts()
+const Store = () => {
   const productRef = useRef<HTMLDivElement>(null)
-  const { ref, isVisible, setIsVisible } = useClickOutside(false, productRef)
+  const { ref } = useClickOutside({
+    initialState: false,
+    exceptionRef: productRef,
+  })
 
-  const handleProductClick = (id: number) => {
-    setData(prevData =>
-      prevData.map(product =>
-        product.id === id
-          ? { ...product, expanded: true }
-          : { ...product, expanded: false },
-      ),
-    )
-    setIsVisible(true)
-  }
+  const dispatch = useDispatch()
+  const dispatchProducts: AppDispatch = useDispatch()
+  const products = useSelector((state: RootState) => state.products)
+  const data = useSelector((state: RootState) => state.products.products)
 
-  const handleBackClick = () => {
-    setData(
-      memoizedData.map(product => ({
-        ...product,
-        expanded: false,
-      })),
-    )
-  }
-
-  const product = memoizedData.find(product => product.expanded)
+  const product = data.find(product => product.expanded)
 
   useEffect(() => {
     if (product) {
@@ -44,17 +37,15 @@ export const Store = () => {
   }, [product])
 
   useEffect(() => {
-    if (!isVisible) {
-      handleBackClick()
-    }
-  }, [isVisible])
+    dispatchProducts(fetchProductsAsync())
+  }, [dispatchProducts])
 
-  if (loading) {
-    return <Loading loading={loading} />
+  if (products.status === 'loading') {
+    return <Loading loading={true} />
   }
 
-  if (error) {
-    return <ErrorMessage error={error} />
+  if (products.status === 'failed') {
+    return <ErrorMessage error={products.error || 'Unknown error'} />
   }
 
   return (
@@ -62,16 +53,18 @@ export const Store = () => {
       <Products
         exceptionRef={productRef}
         className={product ? 'mr-3' : 'mr-0'}
-        data={memoizedData}
-        handleProductClick={handleProductClick}
+        data={products.products}
+        handleProductClick={expandProduct}
       />
       {product && (
         <ExpandProduct
           forwardeRef={ref}
           product={product}
-          handleBackClick={handleBackClick}
+          handleBackClick={() => dispatch(handleBackClick())}
         />
       )}
     </Container>
   )
 }
+
+export default Store

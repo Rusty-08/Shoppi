@@ -24,7 +24,7 @@ const Navbar = ({ setShowSidebar, exceptionRef }: NavbarProps) => {
       <div className="h-full ml-[10%] mr-[11%] px-3 flex border-b border-b-primary items-center justify-between">
         <Link to="/" className="flex gap-2">
           <ShoppingBasket className="w-8 h-8 text-primary-blue" />
-          <h1 className="text-2xl font-medium text-primary-dark">Shoppi</h1>
+          <h1 className="text-2xl font-bold text-primary-blue">Shoppi</h1>
         </Link>
         <div className="flex items-center h-full gap-5">
           <ul className="flex h-full items-center gap-5">

@@ -38,9 +38,11 @@ export const ProductNumber = ({ buttonSize }: ProductNumberProps) => {
       >
         <Minus className={iconSize()} strokeWidth={1} />
       </button>
-      <p className={`${numberSize()} text-primary-dark font-medium absolute`}>{count}</p>
+      <p className={`${numberSize()} text-primary-dark font-medium absolute`}>
+        {count}
+      </p>
       <button
-        className="text-primary-text hover:text-primary-dark active:scale-90"
+        className="text-primary-text hover:text-primary-dark active:scale-95"
         onClick={increamentCount}
       >
         <Plus className={iconSize()} strokeWidth={1} />

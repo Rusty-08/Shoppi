@@ -1,9 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
 
-const useClickOutside = (
-  initialState: boolean,
-  exceptionRef?: React.RefObject<HTMLElement>,
-) => {
+type useClickOutsideProps = {
+  initialState: boolean
+  exceptionRef?: React.RefObject<HTMLElement>
+}
+
+const useClickOutside = ({
+  initialState,
+  exceptionRef,
+}: useClickOutsideProps) => {
   const [isVisible, setIsVisible] = useState(initialState)
   const ref = useRef<HTMLDivElement>(null)
 
@@ -15,7 +20,8 @@ const useClickOutside = (
       !exceptionRef.current.contains(event.target as Node)
     ) {
       setIsVisible(false)
-      console.log('Click outside detected')
+    } else {
+      setIsVisible(true)
     }
   }
 
@@ -27,7 +33,7 @@ const useClickOutside = (
     }
   }, [isVisible])
 
-  return { ref, isVisible, setIsVisible } as const
+  return { ref, isVisible } as const
 }
 
 export default useClickOutside

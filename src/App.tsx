@@ -1,24 +1,25 @@
 import { Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import { Home } from './pages/Home'
-import { Store } from './pages/Store/Store'
+import Home from './pages/Home'
+import Store from './pages/Store/Store'
 import { CartSidebar } from './components/CartSidebar'
 import { useEffect, useRef, useState } from 'react'
 import useClickOutside from './hooks/useClickOutside'
+import { useSelector } from 'react-redux'
+import { RootState } from './app/store'
 
 function App() {
   const [showSidebar, setShowSidebar] = useState(false)
   const hamburgerButtonRef = useRef<HTMLButtonElement>(null)
-  const { ref, isVisible, setIsVisible } = useClickOutside(
-    showSidebar,
-    hamburgerButtonRef,
-  )
+  const { ref, isVisible } = useClickOutside({
+    initialState: showSidebar,
+    exceptionRef: hamburgerButtonRef,
+  })
+
+  const products = useSelector((state: RootState) => state.products.products)
 
   const handleSidebarToggle = () => {
-    setShowSidebar(prev => {
-      setIsVisible(!prev)
-      return !prev
-    })
+    setShowSidebar(prev => !prev)
   }
 
   useEffect(() => {
@@ -38,7 +39,11 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/store" element={<Store />} />
         </Routes>
-        <CartSidebar forwaredRef={ref} showSidebar={showSidebar} />
+        <CartSidebar
+          products={products}
+          forwaredRef={ref}
+          showSidebar={showSidebar}
+        />
       </main>
     </section>
   )

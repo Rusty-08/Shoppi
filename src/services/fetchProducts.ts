@@ -1,3 +1,5 @@
+import { productProps } from '../pages/Store/propTypes'
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type FetchDataOptions = {
   signal?: AbortSignal | null
@@ -19,8 +21,7 @@ async function fetchProducts(options: FetchDataOptions = {}): Promise<any> {
     }
 
     const data = await response.json()
-    console.log(data)
-    return data
+    return data as productProps[]
   } catch (error: any) {
     if (error.name === 'AbortError') {
       console.log('Request was aborted')

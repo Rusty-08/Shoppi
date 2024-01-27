@@ -11,6 +11,7 @@ const buttonVariance = cva(
     'flex',
     'gap-2',
     'text-primary-text',
+    'active:scale-95',
   ],
   {
     variants: {
