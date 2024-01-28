@@ -4,30 +4,32 @@ import { twMerge } from 'tailwind-merge'
 
 const buttonVariance = cva(
   [
-    'transition-colors',
+    'transition-all',
     'duration-300',
     'items-center',
     'justify-center',
     'flex',
     'gap-2',
     'text-primary-text',
-    'active:scale-95',
+    'active:scale-[.99]',
+    'hover:bg-opacity-95',
   ],
   {
     variants: {
       variant: {
-        default: [
-          'bg-primary-blue',
-          'hover:bg-opacity-90',
-          'active:scale-[0.99]',
-          'text-sm',
-          'text-primary',
-        ],
+        default: ['bg-primary-blue', 'text-primary'],
         ghost: ['hover:bg-primary-low-opacity-blue'],
         transparent: ['hover:bg-transparent'],
+        bordered: [
+          'bg-primary-low-opacity-blue',
+          'border',
+          'border-primary-blue',
+          'text-primary-blue',
+          'hover:border-primary-low-opacity-blue',
+        ],
       },
       size: {
-        default: ['rounded-full', 'px-5', 'py-2'],
+        default: ['rounded-md', 'px-8', 'py-3'],
         icon: [
           'rounded-full',
           'w-10',

@@ -1,33 +1,37 @@
 import { ClassNameValue, twMerge } from 'tailwind-merge'
 import { ProductCard } from './ProductCard'
 import { productProps } from './propTypes'
-import { ForwardedRef } from 'react'
+import { useDispatch } from 'react-redux'
+import { expandProduct } from '../../slices/productSlice'
+import { Link } from 'react-router-dom'
 
 type ProductCardProps = {
   data: productProps[]
-  // eslint-disable-next-line no-unused-vars
-  handleProductClick: (_: number) => void
   className?: ClassNameValue
-  exceptionRef: ForwardedRef<HTMLDivElement>
 }
 
-export const Products = ({
-  data,
-  handleProductClick,
-  className,
-  exceptionRef,
-}: ProductCardProps) => {
+export const Products = ({ data, className }: ProductCardProps) => {
+  const dispatch = useDispatch()
+
   const handleClick = (id: number) => {
-    handleProductClick(id)
+    dispatch(expandProduct(id))
+    window.scrollTo(0, 0)
   }
 
   return (
     <div
-      ref={exceptionRef}
-      className={twMerge('grid relative gap-4 grid-cols-4', className)}
+      className={twMerge(
+        'py-8 w-full grid relative gap-4 grid-cols-4',
+        className,
+      )}
     >
       {data.map(({ id, title, price, image, expanded }) => (
-        <button key={id} onClick={() => handleClick(id)}>
+        <Link
+          to={`/store/product/${id}`}
+          key={id}
+          onClick={() => handleClick(id)}
+          className="cursor-pointer"
+        >
           <ProductCard
             id={id}
             title={title}
@@ -35,7 +39,7 @@ export const Products = ({
             image={image}
             expanded={expanded}
           />
-        </button>
+        </Link>
       ))}
     </div>
   )

@@ -1,5 +1,6 @@
 import { Minus, Plus } from 'lucide-react'
 import { useState } from 'react'
+import { Button } from './Button'
 
 type ProductNumberProps = {
   buttonSize: string
@@ -31,22 +32,24 @@ export const ProductNumber = ({ buttonSize }: ProductNumberProps) => {
   }
 
   return (
-    <div className="flex items-center justify-center relative gap-6">
-      <button
-        className="text-primary-text hover:text-primary-dark active:scale-90"
+    <div className="flex rounded-lg border border-primary-low-opacity-blue items-center justify-center relative gap-6">
+      <Button
+        className="px-4 py-2 hover:text-primary-blue"
+        variant="transparent"
         onClick={decreamentCount}
       >
         <Minus className={iconSize()} strokeWidth={1} />
-      </button>
-      <p className={`${numberSize()} text-primary-dark font-medium absolute`}>
+      </Button>
+      <p className={`${numberSize()} text-primary-blue font-medium absolute`}>
         {count}
       </p>
-      <button
-        className="text-primary-text hover:text-primary-dark active:scale-95"
+      <Button
+        className="px-4 py-2 hover:text-primary-blue"
+        variant="transparent"
         onClick={increamentCount}
       >
         <Plus className={iconSize()} strokeWidth={1} />
-      </button>
+      </Button>
     </div>
   )
 }

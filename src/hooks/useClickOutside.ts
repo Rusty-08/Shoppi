@@ -12,26 +12,28 @@ const useClickOutside = ({
   const [isVisible, setIsVisible] = useState(initialState)
   const ref = useRef<HTMLDivElement>(null)
 
-  const handleClickOutside = (event: MouseEvent) => {
-    if (
-      ref.current &&
-      !ref.current.contains(event.target as Node) &&
-      exceptionRef?.current &&
-      !exceptionRef.current.contains(event.target as Node)
-    ) {
-      setIsVisible(false)
-    } else {
-      setIsVisible(true)
-    }
-  }
-
   useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        ref.current &&
+        !ref.current.contains(event.target as Node) &&
+        exceptionRef?.current &&
+        !exceptionRef.current.contains(event.target as Node)
+      ) {
+        setIsVisible(false)
+        console.log('clicked outside')
+      } else {
+        setIsVisible(true)
+        console.log('clicked inside')
+      }
+    }
+
     document.addEventListener('click', handleClickOutside)
 
     return () => {
       document.removeEventListener('click', handleClickOutside)
     }
-  }, [isVisible])
+  }, [isVisible, exceptionRef])
 
   return { ref, isVisible } as const
 }

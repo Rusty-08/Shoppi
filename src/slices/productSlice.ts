@@ -33,9 +33,10 @@ const productsSlice = createSlice({
     },
     expandProduct: (state, action: PayloadAction<number>) => {
       const productId = action.payload
-      state.products = state.products.map(product =>
-        productId === product.id ? { ...product, expanded: true } : product,
-      )
+      state.products = state.products.map(product => ({
+        ...product,
+        expanded: productId === product.id ? true : false,
+      }))
     },
   },
   extraReducers: builder => {
