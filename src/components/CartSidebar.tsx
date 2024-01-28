@@ -20,7 +20,7 @@ export const CartSidebar = ({
       ref={forwaredRef}
       className={`tranform ${
         showSidebar ? 'translate-x-0' : 'translate-x-full'
-      } transition-transform duration-300 px-6 py-2 ease-in-out overflow-y-auto fixed top-[5rem] shadow-md right-0 bg-slate-50 h-container-height w-[30rem]`}
+      } transition-transform duration-300 px-6 py-2 ease-in-out overflow-y-auto fixed top-[5rem] shadow-md right-0 bg-slate-50 h-container-height w-[40rem]`}
     >
       <div className="flex items-center p-4 px-0 border-b gap-2">
         <ShoppingCart className="w-6 h-6 text-primary-blue" />
@@ -35,7 +35,10 @@ export const CartSidebar = ({
       </div>
       <div className="flex w-full py-4 gap-2 flex-col">
         {products?.map(({ id, image, title, price }) => (
-          <div key={id} className="h-20 border rounded-md py-2 pr-2 w-full flex flex-row justify-between items-center">
+          <div
+            key={id}
+            className="h-20 border rounded-md py-2 pr-2 w-full flex flex-row justify-between items-center"
+          >
             <div className="flex w-1/2 items-center h-full">
               <div className="h-full flex items-center justify-center w-16 flex-shrink-0">
                 <img className="h-1/2" src={image} alt={title} />

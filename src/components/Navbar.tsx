@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { LinkPath } from './LinkPath'
 import { Button } from './Button'
 import { ForwardedRef } from 'react'
+import { productProps } from '../pages/Store/propTypes'
 
 const paths = ['Home', 'Store']
 
@@ -16,9 +17,10 @@ const pathName = (path: string) => {
 type NavbarProps = {
   setShowSidebar: () => void
   exceptionRef: ForwardedRef<HTMLButtonElement>
+  products: productProps[]
 }
 
-const Navbar = ({ setShowSidebar, exceptionRef }: NavbarProps) => {
+const Navbar = ({ setShowSidebar, exceptionRef, products }: NavbarProps) => {
   return (
     <nav className="w-screen z-50 fixed top-0 bg-slate-50 h-header left-0">
       <div className="h-full ml-[10%] mr-[11%] px-3 flex border-b border-b-primary items-center justify-between">
@@ -42,7 +44,9 @@ const Navbar = ({ setShowSidebar, exceptionRef }: NavbarProps) => {
             onClick={setShowSidebar}
           >
             <ShoppingCart strokeWidth={1} />
-            <Dot className="absolute text-primary-blue -top-1 -right-2" />
+            {products.length > 0 && (
+              <Dot className="absolute text-primary-blue -top-1 -right-2" />
+            )}
           </Button>
         </div>
       </div>

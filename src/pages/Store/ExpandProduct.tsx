@@ -1,26 +1,23 @@
 import { Button } from '../../components/Button'
-import { ShoppingCart } from 'lucide-react'
+import { Check, ShoppingCart } from 'lucide-react'
 import { ProductNumber } from '../../components/ProductNumber'
-// import { useDispatch } from 'react-redux'
-// import { handleBackClick } from '../../slices/productSlice'
 import { productProps } from './propTypes'
 import { StarRating } from '../../components/StarRating'
-// import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../../slices/productSlice'
 
 type expandProductProps = {
   data: productProps
 }
 
 export const ExpandProduct = ({ data }: expandProductProps) => {
-  // const dispatch = useDispatch()
-  // const navigate = useNavigate()
+  const dispatch = useDispatch()
 
-  const { title, description, image, price, category } = data
+  const { id, title, description, image, price, category, addedToCart } = data
 
-  // const handleBack = () => {
-  //   dispatch(handleBackClick())
-  //   navigate('/store')
-  // }
+  const handleAddToCard = () => {
+    dispatch(addToCart(id))
+  }
 
   return (
     <div className="py-8 w-full border-b-4 border-b-primary-low-opacity-blue">
@@ -52,7 +49,7 @@ export const ExpandProduct = ({ data }: expandProductProps) => {
             </div>
             <p className="font-medium">
               Description:
-              <span className="text-primary-text font-normal line-clamp-[6]">
+              <span className="text-primary-text mt-1 font-normal line-clamp-[6]">
                 {description}
               </span>
             </p>
@@ -65,22 +62,18 @@ export const ExpandProduct = ({ data }: expandProductProps) => {
               <ProductNumber buttonSize="md" />
             </div>
             <div className="w-full flex gap-4">
-              <Button variant="bordered">
-                <ShoppingCart className="w-5" />
+              <Button onClick={handleAddToCard} variant="bordered">
+                {addedToCart ? (
+                  <Check className="w-5" />
+                ) : (
+                  <ShoppingCart className="w-5" />
+                )}
                 Add to Cart
               </Button>
               <Button className="flex-grow">Buy Now</Button>
             </div>
           </div>
         </div>
-        {/* <Button
-          className="absolute left-4 top-3"
-          size="icon"
-          variant="ghost"
-          onClick={handleBack}
-        >
-          <ArrowLeft strokeWidth={1} />
-        </Button> */}
       </div>
     </div>
   )

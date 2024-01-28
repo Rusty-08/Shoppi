@@ -25,20 +25,14 @@ export const Products = ({ data, className }: ProductCardProps) => {
         className,
       )}
     >
-      {data.map(({ id, title, price, image, expanded }) => (
+      {data.map(product => (
         <Link
-          to={`/store/product/${id}`}
-          key={id}
-          onClick={() => handleClick(id)}
+          to={`/store/product/${product.id}`}
+          key={product.id}
+          onClick={() => handleClick(product.id)}
           className="cursor-pointer"
         >
-          <ProductCard
-            id={id}
-            title={title}
-            price={price}
-            image={image}
-            expanded={expanded}
-          />
+          <ProductCard data={product} />
         </Link>
       ))}
     </div>

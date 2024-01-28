@@ -6,4 +6,5 @@ export type productProps = {
   description?: string
   image: string
   expanded: boolean
+  addedToCart: boolean
 }

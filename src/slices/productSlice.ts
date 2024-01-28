@@ -38,6 +38,12 @@ const productsSlice = createSlice({
         expanded: productId === product.id ? true : false,
       }))
     },
+    addToCart: (state, action: PayloadAction<number>) => {
+      const productId = action.payload
+      state.products = state.products.map(product =>
+        productId === product.id ? { ...product, addedToCart: true } : product,
+      )
+    },
   },
   extraReducers: builder => {
     builder
@@ -55,5 +61,6 @@ const productsSlice = createSlice({
   },
 })
 
-export const { handleBackClick, expandProduct } = productsSlice.actions
+export const { handleBackClick, expandProduct, addToCart } =
+  productsSlice.actions
 export default productsSlice.reducer

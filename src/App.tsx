@@ -1,7 +1,7 @@
 import { Route, Routes, useParams } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
-import Store from './pages/Store/Store'
+import Store from './pages/Store'
 import { CartSidebar } from './components/CartSidebar'
 import { useEffect, useRef, useState } from 'react'
 import useClickOutside from './hooks/useClickOutside'
@@ -23,6 +23,8 @@ function App() {
     ? products[Number(productId)]
     : products.find(product => product.expanded)
 
+  const addedToCartProducts = products.filter(product => product.addedToCart)
+
   const handleSidebarToggle = () => {
     setShowSidebar(prev => !prev)
   }
@@ -38,6 +40,7 @@ function App() {
       <Navbar
         setShowSidebar={handleSidebarToggle}
         exceptionRef={hamburgerButtonRef}
+        products={addedToCartProducts}
       />
       <main className="mx-[10%] relative pt-[5rem] pb-8">
         <Routes>
@@ -50,7 +53,7 @@ function App() {
           </Route>
         </Routes>
         <CartSidebar
-          products={products}
+          products={addedToCartProducts}
           forwaredRef={ref}
           showSidebar={showSidebar}
         />

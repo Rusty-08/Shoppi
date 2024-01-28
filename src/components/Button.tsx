@@ -23,9 +23,9 @@ const buttonVariance = cva(
         bordered: [
           'bg-primary-low-opacity-blue',
           'border',
-          'border-primary-blue',
+          'border-transparent',
           'text-primary-blue',
-          'hover:border-primary-low-opacity-blue',
+          'hover:border-primary-blue',
         ],
       },
       size: {
