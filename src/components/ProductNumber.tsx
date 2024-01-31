@@ -1,24 +1,19 @@
 import { Minus, Plus } from 'lucide-react'
-import { useState } from 'react'
 import { Button } from './Button'
 
 type ProductNumberProps = {
   buttonSize: string
+  value: number
+  increament: () => void
+  decreament: () => void
 }
 
-export const ProductNumber = ({ buttonSize }: ProductNumberProps) => {
-  const [count, setCount] = useState(1)
-
-  const increamentCount = () => {
-    setCount(count => count + 1)
-  }
-
-  const decreamentCount = () => {
-    if (count !== 1) {
-      setCount(count => count - 1)
-    }
-  }
-
+export const ProductNumber = ({
+  buttonSize,
+  value,
+  increament,
+  decreament,
+}: ProductNumberProps) => {
   const iconSize = () => {
     if (buttonSize === 'sm') return 'w-4'
     if (buttonSize === 'md') return 'w-6'
@@ -36,17 +31,17 @@ export const ProductNumber = ({ buttonSize }: ProductNumberProps) => {
       <Button
         className="px-4 py-2 hover:text-primary-blue"
         variant="transparent"
-        onClick={decreamentCount}
+        onClick={decreament}
       >
         <Minus className={iconSize()} strokeWidth={1} />
       </Button>
       <p className={`${numberSize()} text-primary-blue font-medium absolute`}>
-        {count}
+        {value}
       </p>
       <Button
         className="px-4 py-2 hover:text-primary-blue"
         variant="transparent"
-        onClick={increamentCount}
+        onClick={increament}
       >
         <Plus className={iconSize()} strokeWidth={1} />
       </Button>

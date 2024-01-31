@@ -2,8 +2,8 @@ import { ClassNameValue, twMerge } from 'tailwind-merge'
 import { ProductCard } from './ProductCard'
 import { productProps } from './propTypes'
 import { useDispatch } from 'react-redux'
-import { expandProduct } from '../../slices/productSlice'
 import { Link } from 'react-router-dom'
+import { expandProduct } from '../../slices/productSlice'
 
 type ProductCardProps = {
   data: productProps[]

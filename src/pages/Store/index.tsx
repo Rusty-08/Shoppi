@@ -5,15 +5,16 @@ import { Container } from '../../components/Container'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../../app/store'
+import { Outlet, useParams } from 'react-router-dom'
 import { fetchProductsAsync } from '../../slices/productSlice'
-import { Outlet } from 'react-router-dom'
 
 const Store = () => {
   const dispatch: AppDispatch = useDispatch()
   const products = useSelector((state: RootState) => state.products)
   const data = useSelector((state: RootState) => state.products.products)
+  const { productId } = useParams()
 
-  const product = data.find(product => product.expanded)
+  const expandedProduct = data[Number(productId) - 1]
 
   useEffect(() => {
     dispatch(fetchProductsAsync())
@@ -29,7 +30,7 @@ const Store = () => {
 
   return (
     <Container className="flex-col">
-      {product && <Outlet />}
+      {expandedProduct && <Outlet />}
       <Products data={data} />
     </Container>
   )

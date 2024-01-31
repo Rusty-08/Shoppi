@@ -10,7 +10,6 @@ import { RootState } from './app/store'
 import { ExpandProduct } from './pages/Store/ExpandProduct'
 
 function App() {
-  const { productId } = useParams()
   const [showSidebar, setShowSidebar] = useState(false)
   const hamburgerButtonRef = useRef<HTMLButtonElement>(null)
   const { ref, isVisible } = useClickOutside({
@@ -19,11 +18,14 @@ function App() {
   })
 
   const products = useSelector((state: RootState) => state.products.products)
-  const product = productId
-    ? products[Number(productId)]
-    : products.find(product => product.expanded)
+  const carts = products.filter(product => product.addedToCart)
 
-  const addedToCartProducts = products.filter(product => product.addedToCart)
+  const ProductRoute = () => {
+    const { productId } = useParams()
+    const expandedProduct = products[Number(productId) - 1]
+
+    return expandedProduct ? <ExpandProduct data={expandedProduct} /> : null
+  }
 
   const handleSidebarToggle = () => {
     setShowSidebar(prev => !prev)
@@ -40,7 +42,7 @@ function App() {
       <Navbar
         setShowSidebar={handleSidebarToggle}
         exceptionRef={hamburgerButtonRef}
-        products={addedToCartProducts}
+        products={carts}
       />
       <main className="mx-[10%] relative pt-[5rem] pb-8">
         <Routes>
@@ -48,12 +50,12 @@ function App() {
           <Route path="/store" element={<Store />}>
             <Route
               path="/store/product/:productId"
-              element={product && <ExpandProduct data={product} />}
+              element={<ProductRoute />}
             />
           </Route>
         </Routes>
         <CartSidebar
-          products={addedToCartProducts}
+          products={carts}
           forwaredRef={ref}
           showSidebar={showSidebar}
         />

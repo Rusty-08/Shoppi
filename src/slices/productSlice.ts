@@ -44,6 +44,26 @@ const productsSlice = createSlice({
         productId === product.id ? { ...product, addedToCart: true } : product,
       )
     },
+    removeFromCart: (state, action: PayloadAction<number>) => {
+      const productId = action.payload
+      state.products = state.products.map(product =>
+        productId === product.id ? { ...product, addedToCart: false } : product,
+      )
+    },
+    incrementCount: (state, action: PayloadAction<number>) => {
+      const productId = action.payload
+      const product = state.products.find(p => p.id === productId)
+      if (product) {
+        product.quantityInCart = (product.quantityInCart ?? 1) + 1
+      }
+    },
+    decrementCount: (state, action: PayloadAction<number>) => {
+      const productId = action.payload
+      const product = state.products.find(p => p.id === productId)
+      if (product && product.quantityInCart && product.quantityInCart > 0) {
+        product.quantityInCart -= 1
+      }
+    },
   },
   extraReducers: builder => {
     builder
@@ -61,6 +81,13 @@ const productsSlice = createSlice({
   },
 })
 
-export const { handleBackClick, expandProduct, addToCart } =
-  productsSlice.actions
+export const {
+  handleBackClick,
+  expandProduct,
+  addToCart,
+  removeFromCart,
+  incrementCount,
+  decrementCount,
+} = productsSlice.actions
+
 export default productsSlice.reducer

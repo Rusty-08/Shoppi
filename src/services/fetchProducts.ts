@@ -21,6 +21,7 @@ async function fetchProducts(options: FetchDataOptions = {}): Promise<any> {
     }
 
     const data = await response.json()
+
     return data as productProps[]
   } catch (error: any) {
     if (error.name === 'AbortError') {

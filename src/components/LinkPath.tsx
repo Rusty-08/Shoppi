@@ -11,7 +11,6 @@ type LinkTypes = {
 
 export const LinkPath = ({ to, children, className, ...props }: LinkTypes) => {
   const resolvePath = useResolvedPath(to)
-  // const { productId } = useParams()
   const isActive = useMatch({
     path: resolvePath.pathname,
     end: true,

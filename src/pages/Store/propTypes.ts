@@ -7,4 +7,5 @@ export type productProps = {
   image: string
   expanded: boolean
   addedToCart: boolean
+  quantityInCart: number
 }

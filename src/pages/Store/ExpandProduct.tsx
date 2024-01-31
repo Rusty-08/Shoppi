@@ -4,7 +4,11 @@ import { ProductNumber } from '../../components/ProductNumber'
 import { productProps } from './propTypes'
 import { StarRating } from '../../components/StarRating'
 import { useDispatch } from 'react-redux'
-import { addToCart } from '../../slices/productSlice'
+import {
+  addToCart,
+  decrementCount,
+  incrementCount,
+} from '../../slices/productSlice'
 
 type expandProductProps = {
   data: productProps
@@ -12,8 +16,16 @@ type expandProductProps = {
 
 export const ExpandProduct = ({ data }: expandProductProps) => {
   const dispatch = useDispatch()
-
-  const { id, title, description, image, price, category, addedToCart } = data
+  const {
+    id,
+    title,
+    description,
+    image,
+    price,
+    category,
+    addedToCart,
+    quantityInCart,
+  } = data
 
   const handleAddToCard = () => {
     dispatch(addToCart(id))
@@ -59,7 +71,12 @@ export const ExpandProduct = ({ data }: expandProductProps) => {
               <p className="text-2xl text-primary-blue font-bold">
                 ${price.toFixed(2)}
               </p>
-              <ProductNumber buttonSize="md" />
+              <ProductNumber
+                buttonSize="sm"
+                value={quantityInCart ?? 1}
+                increament={() => dispatch(incrementCount(id))}
+                decreament={() => dispatch(decrementCount(id))}
+              />
             </div>
             <div className="w-full flex gap-4">
               <Button onClick={handleAddToCard} variant="bordered">
