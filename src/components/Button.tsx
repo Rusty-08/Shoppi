@@ -19,7 +19,7 @@ const buttonVariance = cva(
       variant: {
         default: ['bg-primary-blue', 'text-primary'],
         ghost: ['hover:bg-primary-low-opacity-blue'],
-        transparent: ['hover:bg-transparent'],
+        transparent: ['hover:bg-transparent', 'hover:text-primary-dark'],
         bordered: [
           'bg-primary-low-opacity-blue',
           'border',

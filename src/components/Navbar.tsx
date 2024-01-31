@@ -23,7 +23,7 @@ type NavbarProps = {
 const Navbar = ({ setShowSidebar, exceptionRef, products }: NavbarProps) => {
   return (
     <nav className="w-screen z-50 fixed top-0 bg-slate-50 h-header left-0">
-      <div className="h-full ml-[10%] mr-[11%] px-3 flex border-b border-b-primary items-center justify-between">
+      <div className="h-full ml-[10%] mr-[11%] px-3 flex border-b border-b-primary-low-opacity-blue items-center justify-between">
         <Link to="/" className="flex gap-2">
           <ShoppingBasket className="w-8 h-8 text-primary-blue" />
           <h1 className="text-2xl font-bold text-primary-blue">Shoppi</h1>

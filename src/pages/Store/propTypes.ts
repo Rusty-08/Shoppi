@@ -8,4 +8,5 @@ export type productProps = {
   expanded: boolean
   addedToCart: boolean
   quantityInCart: number
+  checked: boolean
 }

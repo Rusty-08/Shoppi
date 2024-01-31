@@ -38,7 +38,7 @@ function App() {
   }, [isVisible])
 
   return (
-    <section className="bg-slate-50 min-h-screen">
+    <section className={`${showSidebar && 'pr-4'} bg-slate-50 min-h-screen`}>
       <Navbar
         setShowSidebar={handleSidebarToggle}
         exceptionRef={hamburgerButtonRef}

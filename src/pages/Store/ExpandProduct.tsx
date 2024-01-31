@@ -51,32 +51,40 @@ export const ExpandProduct = ({ data }: expandProductProps) => {
               <p className="line-clamp-2 mb-1 text-2xl font-bold text-start text-primary-dark">
                 {title}
               </p>
-              <div className="flex items-center gap-2">
+              <div className="flex mb-1 items-center gap-2">
                 <StarRating size={18} readonly={true} />
                 <p className="text-primary-text text-sm border-x border-x-primary-low-opacity-blue px-2">
                   1k Ratings
                 </p>
                 <p className="text-primary-text text-sm">100 Sold</p>
               </div>
+              <p className="text-primary-black font-medium text-lg">
+                ${price.toFixed(2)}
+              </p>
             </div>
             <p className="font-medium">
               Description:
-              <span className="text-primary-text mt-1 font-normal line-clamp-[6]">
+              <span className="text-primary-text mt-1 font-normal line-clamp-[5]">
                 {description}
               </span>
             </p>
           </div>
           <div className="flex flex-col w-full gap-4">
-            <div className="flex w-full justify-between items-center">
+            <div className="flex h-8 w-full justify-between items-center">
               <p className="text-2xl text-primary-blue font-bold">
-                ${price.toFixed(2)}
+                $
+                {quantityInCart
+                  ? (price * quantityInCart).toFixed(2)
+                  : price.toFixed(2)}
               </p>
-              <ProductNumber
-                buttonSize="sm"
-                value={quantityInCart ?? 1}
-                increament={() => dispatch(incrementCount(id))}
-                decreament={() => dispatch(decrementCount(id))}
-              />
+              {!addedToCart && (
+                <ProductNumber
+                  buttonSize="sm"
+                  value={quantityInCart ?? 1}
+                  increament={() => dispatch(incrementCount(id))}
+                  decreament={() => dispatch(decrementCount(id))}
+                />
+              )}
             </div>
             <div className="w-full flex gap-4">
               <Button onClick={handleAddToCard} variant="bordered">
