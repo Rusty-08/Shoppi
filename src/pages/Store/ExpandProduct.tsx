@@ -9,6 +9,7 @@ import {
   decrementCount,
   incrementCount,
 } from '../../slices/productSlice'
+import { toast } from 'react-toastify'
 
 type expandProductProps = {
   data: productProps
@@ -29,6 +30,9 @@ export const ExpandProduct = ({ data }: expandProductProps) => {
 
   const handleAddToCard = () => {
     dispatch(addToCart(id))
+    toast.success('You successfully added the product to your Cart.', {
+      autoClose: 3000,
+    })
   }
 
   return (

@@ -7,8 +7,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../../app/store'
 import { Outlet, useParams } from 'react-router-dom'
 import { fetchProductsAsync } from '../../slices/productSlice'
+import { productProps } from './propTypes'
 
-const Store = () => {
+type StoreProps = {
+  filteredProducts: productProps[]
+}
+
+const Store = ({ filteredProducts }: StoreProps) => {
   const dispatch: AppDispatch = useDispatch()
   const products = useSelector((state: RootState) => state.products)
   const data = useSelector((state: RootState) => state.products.products)
@@ -31,9 +36,9 @@ const Store = () => {
   }
 
   return (
-    <Container className="flex-col">
+    <Container className="flex-col w-full">
       {expandedProduct && <Outlet />}
-      <Products data={data} />
+      <Products data={filteredProducts} />
     </Container>
   )
 }

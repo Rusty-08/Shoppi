@@ -32,6 +32,13 @@ export const CartSidebar = ({
     dispatch(toggleAllCartChecked(!checked))
   }
 
+  useEffect(() => {
+    if (!showSidebar) {
+      setChecked(false)
+      dispatch(toggleAllCartChecked(false))
+    }
+  }, [checked, dispatch, showSidebar])
+
   const totalCheckedAmount = () => {
     const checkedProducts = products?.filter(product => product.checked)
     return checkedProducts

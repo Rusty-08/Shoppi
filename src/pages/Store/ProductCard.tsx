@@ -4,6 +4,7 @@ import { Check, ShoppingCart } from 'lucide-react'
 import { Button } from '../../components/Button'
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../../slices/productSlice'
+import { toast } from 'react-toastify'
 
 type productCardProps = {
   data: productProps
@@ -18,6 +19,9 @@ export const ProductCard = ({ data }: productCardProps) => {
     e.preventDefault()
     e.stopPropagation()
     dispatch(addToCart(id))
+    toast.success('You successfully added the product to your Cart.', {
+      autoClose: 3000,
+    })
   }
 
   return (
