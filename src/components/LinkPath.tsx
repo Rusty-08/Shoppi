@@ -28,7 +28,7 @@ export const LinkPath = ({ to, children, className, ...props }: LinkTypes) => {
       )}
       {...props}
     >
-      <Link className="h-full flex items-center px-2" to={to}>
+      <Link onClick={e => e.preventDefault} className="h-full flex items-center px-2" to={to}>
         {children}
       </Link>
     </li>

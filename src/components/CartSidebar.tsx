@@ -34,10 +34,12 @@ export const CartSidebar = ({
 
   const totalCheckedAmount = () => {
     const checkedProducts = products?.filter(product => product.checked)
-    return checkedProducts?.reduce(
-      (acc, product) => acc + product.price * product.quantityInCart,
-      0,
-    )
+    return checkedProducts
+      ?.reduce(
+        (acc, product) => acc + product.price * product.quantityInCart,
+        0,
+      )
+      .toFixed(2)
   }
 
   const deleteAllSelectedCarts = () => {

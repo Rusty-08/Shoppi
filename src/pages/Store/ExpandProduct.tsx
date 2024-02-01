@@ -82,7 +82,9 @@ export const ExpandProduct = ({ data }: expandProductProps) => {
                   buttonSize="sm"
                   value={quantityInCart ?? 1}
                   increament={() => dispatch(incrementCount(id))}
-                  decreament={() => dispatch(decrementCount(id))}
+                  decreament={() =>
+                    quantityInCart > 1 && dispatch(decrementCount(id))
+                  }
                 />
               )}
             </div>

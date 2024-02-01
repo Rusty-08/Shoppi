@@ -70,7 +70,7 @@ const productsSlice = createSlice({
       const productId = action.payload
       const product = state.products.find(p => p.id === productId)
       if (product && product.quantityInCart && product.quantityInCart > 0) {
-        product.quantityInCart -= 1
+        product.quantityInCart = (product.quantityInCart ?? 1) - 1
       }
     },
     checkCart: (state, action: PayloadAction<number>) => {

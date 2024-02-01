@@ -17,8 +17,10 @@ const Store = () => {
   const expandedProduct = data[Number(productId) - 1]
 
   useEffect(() => {
-    dispatch(fetchProductsAsync())
-  }, [dispatch])
+    if (products.status === 'idle') {
+      dispatch(fetchProductsAsync())
+    }
+  }, [dispatch, products.status])
 
   if (products.status === 'loading') {
     return <Loading loading={true} />

@@ -47,7 +47,7 @@ function App() {
       <main className="mx-[10%] relative pt-[5rem] pb-8">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/store" element={<Store />}>
+          <Route path="/store" element={<Store key="store" />}>
             <Route
               path="/store/product/:productId"
               element={<ProductRoute />}
