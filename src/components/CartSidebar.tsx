@@ -65,7 +65,7 @@ export const CartSidebar = ({
   return (
     <aside
       className={`${
-        showSidebar ? 'z-10' : 'z-[-1]'
+        showSidebar ? 'z-40' : 'z-[-1]'
       } bg-primary-low-opacity-blue fixed top-0 left-0 transition-all ease-in-out w-screen h-screen`}
     >
       <div

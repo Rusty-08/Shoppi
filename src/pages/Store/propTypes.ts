@@ -5,6 +5,7 @@ export type productProps = {
   category?: string
   description?: string
   image: string
+  rating: number
   expanded: boolean
   addedToCart: boolean
   quantityInCart: number

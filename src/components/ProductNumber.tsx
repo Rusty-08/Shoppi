@@ -29,7 +29,7 @@ export const ProductNumber = ({
   return (
     <div className="flex rounded-lg border border-primary-low-opacity-blue items-center justify-center relative gap-6">
       <Button
-        className="px-4 py-2 hover:text-primary-blue"
+        className="px-4 h-10 hover:text-primary-blue"
         variant="transparent"
         onClick={decreament}
       >
@@ -39,7 +39,7 @@ export const ProductNumber = ({
         {value}
       </p>
       <Button
-        className="px-4 py-2 hover:text-primary-blue"
+        className="px-4 h-10 hover:text-primary-blue"
         variant="transparent"
         onClick={increament}
       >

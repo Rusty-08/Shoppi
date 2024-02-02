@@ -29,7 +29,7 @@ const buttonVariance = cva(
         ],
       },
       size: {
-        default: ['rounded-md', 'px-8', 'py-3'],
+        default: ['rounded-md', 'px-8', 'h-12'],
         icon: [
           'rounded-full',
           'w-10',

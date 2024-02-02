@@ -65,7 +65,7 @@ export const Cart = ({ product }: ProductProps) => {
           buttonSize="sm"
           value={quantityInCart}
           increament={() => dispatch(incrementCount(id))}
-          decreament={() => dispatch(decrementCount(id))}
+          decreament={() => quantityInCart > 1 && dispatch(decrementCount(id))}
         />
         <Button
           onClick={e => removeCart(e, id)}

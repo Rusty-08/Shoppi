@@ -23,6 +23,7 @@ export const ExpandProduct = ({ data }: expandProductProps) => {
     description,
     image,
     price,
+    rating,
     category,
     addedToCart,
     quantityInCart,
@@ -56,7 +57,8 @@ export const ExpandProduct = ({ data }: expandProductProps) => {
                 {title}
               </p>
               <div className="flex mb-1 items-center gap-2">
-                <StarRating size={18} readonly={true} />
+                <p className="text-primary-text text-sm">{rating}</p>
+                <StarRating rate={rating} size={18} readonly={true} />
                 <p className="text-primary-text text-sm border-x border-x-primary-low-opacity-blue px-2">
                   1k Ratings
                 </p>

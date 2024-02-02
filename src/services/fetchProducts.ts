@@ -5,6 +5,18 @@ type FetchDataOptions = {
   signal?: AbortSignal | null
 }
 
+export const rate = (id: number) => {
+  if (id < 10) {
+    return 4.8
+  }
+  if (id < 15) {
+    return 4.0
+  }
+  if (id <= 20) {
+    return 3.8
+  }
+}
+
 async function fetchProducts(options: FetchDataOptions = {}): Promise<any> {
   const apiUrl = 'https://fakestoreapi.com/products'
 
@@ -22,7 +34,12 @@ async function fetchProducts(options: FetchDataOptions = {}): Promise<any> {
 
     const data = await response.json()
 
-    return data as productProps[]
+    const res = data.map((product: productProps) => ({
+      ...product,
+      rating: rate(product.id),
+    }))
+
+    return res as productProps[]
   } catch (error: any) {
     if (error.name === 'AbortError') {
       console.log('Request was aborted')

@@ -13,7 +13,7 @@ type productCardProps = {
 export const ProductCard = ({ data }: productCardProps) => {
   const dispatch = useDispatch()
 
-  const { id, title, image, price, addedToCart } = data
+  const { id, title, image, price, rating, addedToCart } = data
 
   const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
@@ -37,12 +37,12 @@ export const ProductCard = ({ data }: productCardProps) => {
           <p className="text-lg text-primary-blue font-bold">
             ${price.toFixed(2)}
           </p>
-          <StarRating size={15} />
+          <StarRating rate={rating} size={15} />
         </div>
         <Button
           variant="bordered"
           onClick={handleAddToCart}
-          className="w-full text-sm py-2 pr-10"
+          className="w-full h-10 text-sm pr-10"
         >
           {addedToCart ? (
             <Check className="w-5" />
