@@ -12,15 +12,15 @@ import {
 } from '../slices/productSlice'
 
 type CartSidebarProps = {
+  forwardedRef: ForwardedRef<HTMLDivElement>
   products?: productProps[]
   showSidebar: boolean
-  forwaredRef: ForwardedRef<HTMLDivElement>
 }
 
 export const CartSidebar = ({
+  forwardedRef,
   products,
   showSidebar,
-  forwaredRef,
 }: CartSidebarProps) => {
   const dispatch = useDispatch()
   const [checked, setChecked] = useState(false)
@@ -69,10 +69,10 @@ export const CartSidebar = ({
       } bg-primary-low-opacity-blue fixed top-0 left-0 transition-all ease-in-out w-screen h-screen`}
     >
       <div
-        ref={forwaredRef}
+        ref={forwardedRef}
         className={`tranform ${
           showSidebar ? 'translate-x-0' : 'translate-x-full'
-        } z-20 transition-transform duration-300 ease-in-out overflow-y-auto fixed top-[5rem] shadow-md right-0 bg-slate-50 h-container-height w-[40rem] max-w-[100vw]`}
+        } z-20 transition-transform duration-[400] ease-in-out overflow-y-auto fixed top-[5rem] shadow-md right-0 bg-slate-50 h-container-height w-[40rem] max-w-[100vw]`}
       >
         <div className="flex flex-col h-full w-full">
           <div className="flex items-center flex-shrink-0 px-6 h-16 border-b border-b-primary-low-opacity-blue gap-2">

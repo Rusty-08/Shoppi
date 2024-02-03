@@ -30,14 +30,14 @@ export const ExpandProduct = ({ data }: expandProductProps) => {
   } = data
 
   const handleAddToCard = () => {
-    dispatch(addToCart(id))
-    toast.success('You successfully added the product to your Cart.', {
-      autoClose: 3000,
-    })
+    if (!addedToCart) {
+      dispatch(addToCart(id))
+      toast.success('You successfully added the product to your Cart.')
+    }
   }
 
   return (
-    <div className="py-8 w-full border-b-4 border-b-primary-low-opacity-blue">
+    <div className="py-4 w-full">
       <div className="flex h-[28rem] gap-10 relative w-full">
         <div className="h-full border rounded-lg border-primary-low-opacity-blue shadow-sm bg-white w-1/2 flex items-center justify-center bg-cover">
           <img

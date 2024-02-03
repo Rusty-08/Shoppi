@@ -18,10 +18,10 @@ export const ProductCard = ({ data }: productCardProps) => {
   const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     e.stopPropagation()
-    dispatch(addToCart(id))
-    toast.success('You successfully added the product to your Cart.', {
-      autoClose: 3000,
-    })
+    if (!addedToCart) {
+      dispatch(addToCart(id))
+      toast.success('You successfully added the product to your Cart.')
+    }
   }
 
   return (
@@ -29,7 +29,7 @@ export const ProductCard = ({ data }: productCardProps) => {
       <div className="h-1/3 flex items-center justify-center bg-cover">
         <img className="h-full" src={image} alt={title} />
       </div>
-      <div className="flex w-full flex-col items-start gap-4">
+      <div className="flex w-full flex-col items-start gap-3">
         <p className="line-clamp-2 font-medium text-start text-primary-dark">
           {title}
         </p>

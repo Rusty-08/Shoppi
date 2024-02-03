@@ -22,7 +22,7 @@ export const Products = ({ data, className }: ProductCardProps) => {
     <div
       style={{ minHeight: 'calc(100vh - 12rem)' }}
       className={twMerge(
-        'py-8 w-full grid relative gap-4 grid-cols-4',
+        'py-4 border-t border-t-primary-low-opacity-blue w-full grid relative gap-4 grid-cols-4',
         className,
       )}
     >
