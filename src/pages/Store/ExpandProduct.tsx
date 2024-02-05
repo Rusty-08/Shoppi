@@ -97,11 +97,16 @@ export const ExpandProduct = ({ data }: expandProductProps) => {
             <div className="w-full flex gap-4">
               <Button onClick={handleAddToCard} variant="bordered">
                 {addedToCart ? (
-                  <Check className="w-5" />
+                  <>
+                    <Check className="w-5" />
+                    Added to Cart
+                  </>
                 ) : (
-                  <ShoppingCart className="w-5" />
+                  <>
+                    <ShoppingCart className="w-5" />
+                    Add to Cart
+                  </>
                 )}
-                Add to Cart
               </Button>
               <Button className="flex-grow">Buy Now</Button>
             </div>

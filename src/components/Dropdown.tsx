@@ -22,7 +22,9 @@ const Dropdown = ({ children, Description }: DropdownProps) => {
         onClick={toggle}
         variant="bordered"
         className={`${
-          isOpen ? 'border-primary-blue' : 'border-primary-low-opacity-blue'
+          isOpen
+            ? 'border-primary-blue bg-primary-low-opacity-blue'
+            : 'border-primary-low-opacity-blue bg-white'
         } px-4 border gap-1`}
       >
         {typeof Description === 'string' ? (
@@ -43,7 +45,7 @@ const Dropdown = ({ children, Description }: DropdownProps) => {
         ref={ref}
         className={`transform ${
           isOpen ? 'visible' : 'hidden'
-        } absolute bg-white shadow-sm top-16 right-0 min-h-40 min-w-52 border border-primary-low-opacity-blue rounded-md`}
+        } absolute z-30 bg-white shadow-sm top-16 right-0 min-h-40 min-w-52 border border-primary-low-opacity-blue rounded-md`}
       >
         {children}
       </div>

@@ -19,23 +19,28 @@ export const Products = ({ data, className }: ProductCardProps) => {
   }
 
   return (
-    <div
-      style={{ minHeight: 'calc(100vh - 12rem)' }}
-      className={twMerge(
-        'py-4 border-t border-t-primary-low-opacity-blue w-full grid relative gap-4 grid-cols-4',
-        className,
-      )}
+    <section
+      style={{ minHeight: 'calc(65vh - 12rem)' }}
+      className="py-4 border-t border-t-primary-low-opacity-blue w-full"
     >
-      {data.map(product => (
-        <Link
-          to={`/store/product/${product.id}`}
-          key={product.id}
-          onClick={() => handleClick(product.id)}
-          className="cursor-pointer"
-        >
-          <ProductCard data={product} />
-        </Link>
-      ))}
-    </div>
+      {data.length > 0 ? (
+        <div className={twMerge(' grid relative gap-4 grid-cols-4', className)}>
+          {data.map(product => (
+            <Link
+              to={`/store/product/${product.id}`}
+              key={product.id}
+              onClick={() => handleClick(product.id)}
+              className="cursor-pointer"
+            >
+              <ProductCard data={product} />
+            </Link>
+          ))}
+        </div>
+      ) : (
+        <h1 className="text-primary-text italic text-center w-full">
+          No Results
+        </h1>
+      )}
+    </section>
   )
 }

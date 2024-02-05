@@ -3,11 +3,15 @@ import { RootState } from '../app/store'
 import { Button } from './Button'
 
 type CategoriesProps = {
+  selectedCategories: string[]
   // eslint-disable-next-line no-unused-vars
   selectCategory: (_: string) => void
 }
 
-const Categories = ({ selectCategory }: CategoriesProps) => {
+const Categories = ({
+  selectedCategories,
+  selectCategory,
+}: CategoriesProps) => {
   const products = useSelector((state: RootState) => state.products.products)
   const categories = [...new Set(products.map(product => product.category))]
 
@@ -22,9 +26,14 @@ const Categories = ({ selectCategory }: CategoriesProps) => {
       <div className="grid grid-cols-4 gap-4">
         {categories.map(category => (
           <Button
+            key={category}
             onClick={() => category && selectCategory(category)}
             variant="bordered"
-            className="flex-grow bg-white px-6 text-primary-dark border border-primary-low-opacity-blue rounded-lg h-20 flex items-center justify-start gap-4"
+            className={`${
+              category && selectedCategories.includes(category)
+                ? 'border-primary-blue'
+                : 'border-primary-low-opacity-blue'
+            } flex-grow bg-white px-6 text-primary-dark border rounded-lg h-20 flex items-center justify-start gap-4`}
           >
             <img
               className="h-1/2"

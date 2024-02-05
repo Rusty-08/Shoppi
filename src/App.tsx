@@ -30,7 +30,7 @@ function App() {
     <section className={`${showSidebar && 'pr-4'} bg-slate-50 min-h-screen`}>
       <ToastContainer autoClose={1000} className="w-max z-50 h-14" />
       <Navbar setShowSidebar={handleSidebarToggle} products={carts} />
-      <main className="mx-[10%] relative pt-[5rem] pb-8">
+      <main className="mx-[10%] relative pt-20 pb-8">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/store" element={<Store />}>
